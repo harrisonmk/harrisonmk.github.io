@@ -1,0 +1,43 @@
+<nav class="navbar navbar-dark bg-dark">
+
+  <a class="navbar-brand">Gerenciador Tarefas</a>
+
+</nav>
+
+<div class="container mt-4">
+  <h3>Tarefas</h3>
+  <hr/>
+  <form [formGroup] ="form" (ngSubmit)="submit()" >
+    <div class="row">
+      <div class="col-md-6">
+        <input type="text" class="form-control" formControlName="descricao"/>
+      </div>
+      <div class="col-md-2">
+        <button type="submit" [disabled]="!form.get('descricao').valid" class="btn btn-primary">Adicionar</button>
+      </div>
+
+    </div>
+  </form>
+  <hr/>
+  <div class="row">
+    <div class="col-md-7">
+      <ul class="list-group">
+        <li *ngFor="let todo of todos" class="list-group-item d-flex justify-content-between align-items-center">
+          <span class="{{todo.tarefaRealizada ? 'done' : ''}}">
+            {{todo.descricao}}  <br/>{{todo.tarefaRealizada ? 'concluido em: ' : '' }} {{todo.horaTarefaConcluida}}
+          </span>
+
+
+            <div class="btn-group">
+            <button class="btn btn-success" [disabled]="todo.tarefaRealizada" (click)="done(todo)">concluido</button>
+              <button class="btn badge-danger " (click)="delete(todo)">Excluir</button>
+            </div>
+
+
+        </li>
+      </ul>
+
+    </div>
+  </div>
+
+</div>
